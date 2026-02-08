@@ -7,7 +7,7 @@ use Term::ReadKey;
 use Term::ANSIScreen qw(cls);
 
 my $FileEditor = "/bin/nano";
-my $InitDName = "/home/wowowner/bin/openrct2";
+my $InitDName = "sudo service ";
 my $AZCDIR = "/home/wowowner/azerothcore";
 my $BackupCommand = "/home/wowowner/Azerothcore-Backup/azerothbackup -snapshot";
 my $GameLog = "/home/wowowner/OpenRCT2/OpenRCT2Screen.log";
@@ -199,11 +199,8 @@ sub MainMenu
 	}
 
 	$menuselection = $d->menu( title => "Main Menu", text => "World Server $ServerStatus, Auth Server $AuthStatus - Select one:",
-                            list => [ '1', 'Start Watchdog',
-                                      '2', 'Stop Watchdog',
-                                      '3', 'Server Console',
-                                      '4', 'Turn Respawn Off',
-                                      '5', 'Turn Respawn On',
+                            list => [ '1', 'Start All Servers',
+                                      '2', 'Server Console',
                                       '6', 'Edit config.ini',
                                       '7', 'Backup Game',
                                       '8', 'Kill Game Process',
@@ -225,7 +222,7 @@ while (-1)
 		system("$InitDName az-worldserver start");
 		sleep(3);
 	}
-	elsif ($menuselection eq "3")
+	elsif ($menuselection eq "2")
 	{
 		$d->msgbox( text => "To exit the AzerothCore console and return to AZMC press CTRL-A CTRL-D" );
 		system("screen -r");
