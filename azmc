@@ -15,7 +15,6 @@ my $Pager = "/usr/bin/less";
 my $AZMCDir = "/home/wowowner/Azerothcore-Manager";
 my $BackupToolDir = "/home/wowowner/Azerothcore-Backup";
 my $UpdateCommand = "/usr/bin/git pull";
-my $BinDir = "/home/wowowner/bin";
 my $DEBUG_MODE = "off";
 my $TEXTDIR = "$AZCDIR/resources/text";
 my $ConfigDir = "/home/wowowner/.config/OpenRCT2";
@@ -222,37 +221,14 @@ while (-1)
 	}
 	if ($menuselection eq "1")
 	{
-                if ($d->yesno( text => "Confirm starting the server watchdog", text => "Are you sure you want to start the server watchdog? You should likely use option #8 instead..." ))
-                {
-                        system("$InitDName start");
-                        sleep(10);
-                }
-	}
-	elsif ($menuselection eq "2")
-	{
-		if ($d->yesno( text => "Confirm stopping the server watchdog", text => "Are you sure you want to shut down the server watchdog?" ))
-		{
-			system("$InitDName stop");
-			sleep(5);
-		}
+		system("$InitDName az-authserver start");
+		system("$InitDName az-worldserver start");
+		sleep(3);
 	}
 	elsif ($menuselection eq "3")
 	{
-		$d->msgbox( text => "To exit the Roller Coaster Tycoon console and return to AZMC press CTRL-A CTRL-D" );
+		$d->msgbox( text => "To exit the AzerothCore console and return to AZMC press CTRL-A CTRL-D" );
 		system("screen -r");
-	}
-	elsif ($menuselection eq "4")
-	{
-		# Turn off respawn
-		system("touch $AZCDIR/nostart");
-	}
-	elsif ($menuselection eq "5")
-	{
-		# Turn respawn back on
-		if (-f "$AZCDIR/nostart")
-		{
-			unlink("$AZCDIR/nostart");
-		}
 	}
 	elsif ($menuselection eq "6")
 	{
