@@ -14,10 +14,11 @@ my $GameLog = "/home/wowowner/OpenRCT2/OpenRCT2Screen.log";
 my $Pager = "/usr/bin/less";
 my $AZMCDir = "/home/wowowner/Azerothcore-Manager";
 my $BackupToolDir = "/home/wowowner/Azerothcore-Backup";
+my $StartupToolDir = "/home/wowowner/Azerothcore-Startup";
 my $UpdateCommand = "/usr/bin/git pull";
 my $DEBUG_MODE = "off";
-my $TEXTDIR = "$AZCDIR/resources/text";
-my $ConfigDir = "/home/wowowner/.config/OpenRCT2";
+my $AUTH_SERVICE = "/home/wowowner/azerothcore/startazerothauth";
+my $WORLD_SERVICE = "/home/wowowner/azerothcore/startazerothworld";
 
 ###################################################
 # No changes below here
@@ -106,6 +107,7 @@ sub UpdateToolsMenu
 	$menuselection = $d->menu( title => "Update Utilities Menu", text => "Server $ServerStatus, Auth Server $AuthStatus - Select one:",
                             list => [ '1', 'Update AZMC',
                                       '2', 'Update Backup',
+                                      '3', 'Update Startup',
                                       'q', 'Main Menu' ] );
 }
 
@@ -127,6 +129,11 @@ sub UpdateTools
 		{
 			# Update BackupToolDir
 			DoUpdate($BackupToolDir);
+		}
+		elsif ($menuselection eq "3")
+		{
+			# Update StartupToolDir
+			DoUpdate($StartupToolDir);
 		}
 	}
 }
@@ -201,8 +208,9 @@ sub MainMenu
 	$menuselection = $d->menu( title => "Main Menu", text => "World Server $ServerStatus, Auth Server $AuthStatus - Select one:",
                             list => [ '1', 'Start All Servers',
                                       '2', 'Server Console',
-                                      '6', 'Edit config.ini',
-                                      '7', 'Backup Game',
+                                      '3', 'Edit Authservice',
+                                      '4', 'Edit Worldservice',
+                                      '7', 'Snapshot Backup',
                                       '8', 'Kill Game Process',
                                       '9', 'Update Utils',
                                       'q', 'Quit AZMC' ] );
@@ -227,10 +235,15 @@ while (-1)
 		$d->msgbox( text => "To exit the AzerothCore console and return to AZMC press CTRL-A CTRL-D" );
 		system("screen -r");
 	}
-	elsif ($menuselection eq "6")
+	elsif ($menuselection eq "3")
 	{
-		# Edit config.ini file
-		system("$FileEditor $ConfigDir/config.ini");
+		# Edit Authserver
+		system("$FileEditor $AUTH_SERVICE");
+	}
+	elsif ($menuselection eq "4")
+	{
+		# Edit Authserver
+		system("$FileEditor $WORLD_SERVICE");
 	}
 	elsif ($menuselection eq "7")
 	{
