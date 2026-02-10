@@ -7,7 +7,7 @@ use Term::ReadKey;
 use Term::ANSIScreen qw(cls);
 
 my $FileEditor = "/bin/nano";
-my $InitDName = "sudo service ";
+my $InitDName = "/home/wowowner/bin/azerothcore";
 my $AZCDIR = "/home/wowowner/azerothcore";
 my $BackupCommand = "/home/wowowner/Azerothcore-Backup/azerothbackup -snapshot";
 my $GameLog = "/home/wowowner/OpenRCT2/OpenRCT2Screen.log";
@@ -175,7 +175,7 @@ sub ProcessKill
 			else
 			{
 				print "Auth server not running...";
-				sleep(3)
+				sleep(3);
 			}
                 }
                 elsif ($menuselection eq "2")
@@ -226,8 +226,8 @@ while (-1)
 	}
 	if ($menuselection eq "1")
 	{
-		system("$InitDName az-authserver start");
-		system("$InitDName az-worldserver start");
+		system("$InitDName authserver start");
+		system("$InitDName worldserver start");
 		sleep(3);
 	}
 	elsif ($menuselection eq "2")
