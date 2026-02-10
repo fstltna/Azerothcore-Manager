@@ -12,7 +12,7 @@ I suggest you then add this to your /home/wowowner/.bashrc file:
 
 You will need to install the required perl modules (as root):
 
-- /home/wowowner/Azerothcore-Manager/installdeps
+- sudo /home/wowowner/Azerothcore-Manager/installdeps
 
 
 After that you should log out and back in and now "azmc" should work.
