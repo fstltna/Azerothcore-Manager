@@ -15,6 +15,7 @@ my $Pager = "/usr/bin/less";
 my $AZMCDir = "/home/wowowner/Azerothcore-Manager";
 my $BackupToolDir = "/home/wowowner/Azerothcore-Backup";
 my $StartupToolDir = "/home/wowowner/Azerothcore-Startup";
+my $CONFIG_DIR = "/home/wowowner/azerothcore/env/dist/etc";
 my $UpdateCommand = "/usr/bin/git pull";
 my $DEBUG_MODE = "off";
 my $AUTH_SERVICE = "/home/wowowner/azerothcore/startazerothauth";
@@ -207,12 +208,13 @@ sub MainMenu
 
 	$menuselection = $d->menu( title => "Main Menu", text => "World Server $ServerStatus, Auth Server $AuthStatus - Select one:",
                             list => [ '1', 'Start All Servers',
-                                      '2', 'Server Console',
-                                      '3', 'Edit Authservice',
-                                      '4', 'Edit Worldservice',
-                                      '7', 'Snapshot Backup',
-                                      '8', 'Kill Game Process',
-                                      '9', 'Update Utils',
+                                      '2', 'World Console',
+                                      '3', 'Auth Console',
+                                      '4', 'Edit Authservice',
+                                      '5', 'Edit Worldservice',
+                                      '6', 'Snapshot Backup',
+                                      '7', 'Kill Game Process',
+                                      '8', 'Update Utils',
                                       'q', 'Quit AZMC' ] );
 }
 
@@ -232,20 +234,25 @@ while (-1)
 	}
 	elsif ($menuselection eq "2")
 	{
-		$d->msgbox( text => "To exit the AzerothCore console and return to AZMC press CTRL-A CTRL-D" );
-		system("screen -r");
+		$d->msgbox( text => "To exit the AzerothCore World console and return to AZMC press CTRL-A CTRL-D" );
+		system("screen -r WorldServer");
 	}
 	elsif ($menuselection eq "3")
 	{
-		# Edit Authserver
-		system("$FileEditor $AUTH_SERVICE");
+		$d->msgbox( text => "To exit the AzerothCore Auth console and return to AZMC press CTRL-A CTRL-D" );
+		system("screen -r AuthServer");
 	}
 	elsif ($menuselection eq "4")
 	{
-		# Edit Authserver
-		system("$FileEditor $WORLD_SERVICE");
+		# Edit Authserver conf
+		system("$FileEditor $CONFIG_DIR/authserver.conf");
 	}
-	elsif ($menuselection eq "7")
+	elsif ($menuselection eq "5")
+	{
+		# Edit Authserver conf
+		system("$FileEditor $CONFIG_DIR/worldserver.conf");
+	}
+	elsif ($menuselection eq "6")
 	{
                 # Run a backup
                 system("clear");
@@ -253,11 +260,11 @@ while (-1)
                 print "Press Enter To Continue";
                 my $entered = <STDIN>;
 	}
-	elsif ($menuselection eq "8")
+	elsif ($menuselection eq "7")
 	{
 		ProcessKill();
 	}
-	elsif ($menuselection eq "9")
+	elsif ($menuselection eq "8")
 	{
 		# Update Menu
 		UpdateTools();
