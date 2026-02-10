@@ -1,6 +1,8 @@
 # AzerothCore Management Console (1.0.0)
 Allows you to manage your AzerothCore server with a text based UI - 
 
+![alt Welcome Screen](titlescreen.png "Welcome Screen")
+![alt Main Menu](mainmenu.png "Main Menu")
 
 ---
 
